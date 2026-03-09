@@ -16,26 +16,13 @@ Terenkripsi penuh dengan DNS over TLS (DoT) & DNS over HTTPS (DoH).
 
 ---
 
-## 📊 Statistik Blocklist
-
-| Kategori | Sumber | Estimasi Domain |
-|---|---|---|
-| Iklan & Tracker | OISD Big, AdguardDNS, GoodbyeAds, ABPIndo | ~600.000 |
-| Malware & Phishing | Hagezi TIF, StevenBlack | ~300.000 |
-| Judi Online | Hagezi Gambling, custom list | ~150.000 |
-| Pornografi | Hagezi Porn | ~200.000 |
-| Telemetri & Tracking | Hagezi Pro | ~100.000 |
-| **Total** | **8 sumber + custom** | **~1.3 Juta+** |
-
----
-
 ## 🌐 DNS Server Address
 
 | Protokol | Alamat | Keterangan |
 |---|---|---|
 | **IPv4** | `43.157.240.28` | Standar, kompatibel semua perangkat |
-| **DNS over TLS** | `dns.purnomoadi.web.id` | Terenkripsi, port 853 |
-| **DNS over HTTPS** | `https://dns.purnomoadi.web.id/dns-query` | Terenkripsi via HTTPS |
+| **DNS over TLS** | `dns.purnomoadi.web.id` | Terenkripsi |
+| **DNS over HTTPS** | `dns.purnomoadi.web.id/dns-query` | Terenkripsi via HTTPS |
 
 ---
 
@@ -156,7 +143,7 @@ MIT License — bebas digunakan, dimodifikasi, dan didistribusikan.
 
 <div align="center">
   
-Dibuat dengan ❤️ oleh [MalamPutih DNS](https://dns.purnomoadi.web.id)  
+Dibuat oleh [MalamPutih DNS](https://dns.purnomoadi.web.id)  
 untuk internet Indonesia yang lebih aman.
 
 </div>
