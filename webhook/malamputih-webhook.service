@@ -1,0 +1,23 @@
+[Unit]
+Description=MalamPutih DNS Webhook Server
+After=network.target dns.service
+Wants=dns.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/malamputih
+ExecStart=/usr/bin/python3 /opt/malamputih/webhook.py
+Restart=always
+RestartSec=5
+
+# Environment variables — GANTI nilai di bawah ini
+Environment="WEBHOOK_SECRET=GANTI_DENGAN_SECRET_KAMU"
+Environment="TECHNITIUM_TOKEN=8339edc7f42c80c9935e92946494629055cdc0d2eac65f9ecb6272eda62f2c7f"
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

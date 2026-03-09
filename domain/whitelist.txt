@@ -1,0 +1,154 @@
+# ============================================================
+# MalamPutih DNS — Whitelist
+# Domain yang DIKECUALIKAN dari pemblokiran
+#
+# Format: satu domain per baris
+# Komentar diawali dengan #
+# ============================================================
+
+# ── PERBANKAN INDONESIA ────────────────────────────────────
+klikbca.com
+m.klikbca.com
+ibsn.bri.co.id
+internet-banking.bri.co.id
+ib.mandiri.co.id
+mandirionline.com
+bni.co.id
+ibank.bni.co.id
+btn.co.id
+ibankingpersonal.btn.co.id
+cimniagaonline.com
+ocbcnisp.com
+internetbanking.ocbcnisp.com
+bca.co.id
+brimo.bri.co.id
+livin.mandiri.co.id
+
+# ── E-COMMERCE INDONESIA ──────────────────────────────────
+tokopedia.com
+shopee.co.id
+lazada.co.id
+bukalapak.com
+blibli.com
+jd.id
+zalora.co.id
+sociolla.com
+orami.co.id
+bhinneka.com
+ralali.com
+indotrading.com
+
+# ── PEMBAYARAN & FINTECH ───────────────────────────────────
+gopay.co.id
+ovo.id
+dana.id
+linkaja.id
+jenius.com
+flip.id
+xendit.co
+midtrans.com
+doku.com
+nicepay.co.id
+kredivo.com
+akulaku.com
+traveloka.com
+
+# ── PEMERINTAH INDONESIA ──────────────────────────────────
+go.id
+kemenkeu.go.id
+pajak.go.id
+bpjs-kesehatan.go.id
+bpjsketenagakerjaan.go.id
+kpu.go.id
+bps.go.id
+bi.go.id
+ojk.go.id
+kominfo.go.id
+covid19.go.id
+pedulilindungi.id
+
+# ── MEDIA & BERITA INDONESIA ──────────────────────────────
+kompas.com
+detik.com
+liputan6.com
+tribunnews.com
+tempo.co
+cnnindonesia.com
+cnbcindonesia.com
+antaranews.com
+republika.co.id
+okezone.com
+merdeka.com
+kumparan.com
+tirto.id
+medcom.id
+bisnis.com
+
+# ── PENDIDIKAN INDONESIA ──────────────────────────────────
+kemdikbud.go.id
+belajar.id
+ruangguru.com
+zenius.net
+quipper.com
+brainly.co.id
+sekolah.mu
+udemy.com
+coursera.org
+edx.org
+
+# ── TELEKOMUNIKASI INDONESIA ──────────────────────────────
+telkom.co.id
+telkomsel.com
+indosat.com
+xl.co.id
+tri.co.id
+smartfren.com
+myxl.co.id
+myindosatooredoo.com
+
+# ── LAYANAN UMUM ──────────────────────────────────────────
+google.com
+google.co.id
+googleapis.com
+gstatic.com
+gmail.com
+youtube.com
+ytimg.com
+googlevideo.com
+facebook.com
+instagram.com
+twitter.com
+x.com
+whatsapp.com
+whatsapp.net
+tiktok.com
+tiktokcdn.com
+zoom.us
+microsoft.com
+office.com
+office365.com
+live.com
+outlook.com
+apple.com
+icloud.com
+cloudflare.com
+cloudflare-dns.com
+jsdelivr.net
+cdnjs.cloudflare.com
+github.com
+github.io
+githubusercontent.com
+npmjs.com
+
+# ── CDN & INFRASTRUKTUR ────────────────────────────────────
+akamaized.net
+akamai.net
+fastly.net
+cloudfront.net
+amazonaws.com
+azureedge.net
+bunnycdn.com
+
+# ── CUSTOM — tambahkan domain di sini ─────────────────────
+# contoh:
+# domain-saya.com

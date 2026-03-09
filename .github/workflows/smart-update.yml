@@ -1,0 +1,140 @@
+name: 🧠 Smart Blocklist — Pattern + NRD + Crawler
+
+on:
+  schedule:
+    # Setiap hari jam 00:00 UTC (07:00 WIB)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Mode update'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - full
+          - pattern
+          - nrd
+          - crawl
+
+permissions:
+  contents: write
+
+jobs:
+  smart-update:
+    name: Smart Blocklist Update
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+
+    steps:
+      - name: 📥 Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 🔧 Install dependencies
+        run: |
+          sudo apt-get install -y curl gawk bzip2
+          pip install requests tldextract 2>/dev/null || true
+          chmod +x scripts/smart-blocklist.sh
+          chmod +x scripts/update.sh
+
+      - name: 🔄 Update blocklist utama
+        run: bash scripts/update.sh
+
+      - name: 🧠 Jalankan Smart Blocklist
+        run: |
+          MODE="${{ inputs.mode || 'full' }}"
+          case "$MODE" in
+            pattern) bash scripts/smart-blocklist.sh --pattern ;;
+            nrd)     bash scripts/smart-blocklist.sh --nrd ;;
+            crawl)   bash scripts/smart-blocklist.sh --crawl ;;
+            *)       bash scripts/smart-blocklist.sh ;;
+          esac
+
+      - name: 🔀 Gabungkan semua blocklist
+        run: |
+          echo "Menggabungkan blocklist utama + smart blocklist..."
+          MAIN="domain/blocklist.txt"
+          SMART="domain/smart-blocklist.txt"
+          MERGED="domain/merged-final.txt"
+
+          {
+            echo "# MalamPutih DNS — Final Merged Blocklist"
+            echo "# Dibuat: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
+            echo ""
+            # Gabungkan semua, deduplikasi
+            cat "$MAIN" "$SMART" 2>/dev/null \
+              | grep -v '^#' \
+              | grep -v '^[[:space:]]*$' \
+              | tr '[:upper:]' '[:lower:]' \
+              | sort -u
+          } > "$MERGED"
+
+          TOTAL=$(grep -c '^[a-z]' "$MERGED" || echo 0)
+          echo "Total merged: $TOTAL domain"
+
+          # Update stats
+          python3 -c "
+import json
+try:
+    with open('stats.json','r') as f: d=json.load(f)
+except:
+    d={}
+d['total_merged']=$TOTAL
+d['merged_updated']='$(date -u +%Y-%m-%dT%H:%M:%SZ)'
+with open('stats.json','w') as f: json.dump(d,f,indent=2)
+print('stats.json updated')
+" 2>/dev/null || true
+
+      - name: 📊 Statistik
+        run: |
+          echo "## 📊 Statistik Update" >> $GITHUB_STEP_SUMMARY
+          echo "| File | Jumlah Domain |" >> $GITHUB_STEP_SUMMARY
+          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+          for f in domain/blocklist.txt domain/smart-blocklist.txt domain/merged-final.txt; do
+            if [[ -f "$f" ]]; then
+              COUNT=$(grep -c '^[a-z]' "$f" || echo 0)
+              echo "| \`$f\` | **$COUNT** |" >> $GITHUB_STEP_SUMMARY
+            fi
+          done
+          if [[ -f stats.json ]]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+            cat stats.json >> $GITHUB_STEP_SUMMARY
+            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: 💾 Commit & Push
+        run: |
+          git config user.name  "MalamPutih DNS Bot"
+          git config user.email "bot@dns.purnomoadi.web.id"
+          git add domain/ stats.json
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan."
+          else
+            TOTAL=$(python3 -c "
+import json
+try:
+  d=json.load(open('stats.json'))
+  print(d.get('total_merged', d.get('total','?')))
+except: print('?')
+" 2>/dev/null)
+            git commit -m "🧠 Smart update — ${TOTAL} domain ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+            git push
+            echo "✅ Push berhasil!"
+          fi
+
+      - name: 🔄 Trigger Technitium Update
+        if: ${{ secrets.DNS_TOKEN != '' }}
+        env:
+          DNS_TOKEN: ${{ secrets.DNS_TOKEN }}
+          DNS_HOST:  ${{ secrets.DNS_HOST }}
+        run: |
+          curl -sf "http://${DNS_HOST}/api/blocklist/forceUpdate?token=${DNS_TOKEN}" \
+            --max-time 15 | python3 -m json.tool || warn "Technitium tidak dapat dihubungi"

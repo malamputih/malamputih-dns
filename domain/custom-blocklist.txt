@@ -1,0 +1,22 @@
+# ============================================================
+# MalamPutih DNS — Custom Blocklist Indonesia
+# Domain berbahaya yang belum ada di sumber utama
+#
+# Kontribusi: buat Pull Request atau Issue di GitHub
+# Format: satu domain per baris, komentar diawali #
+# ============================================================
+
+# ── JUDI ONLINE INDONESIA ─────────────────────────────────
+# Tambahkan domain judi yang ditemukan di sini
+
+# ── PHISHING INDONESIA ────────────────────────────────────
+# Domain phishing yang menyamar sebagai layanan resmi
+
+# ── MALWARE & SCAM ────────────────────────────────────────
+# Domain penyebar malware atau scam yang ditemukan
+
+# ── PINJOL ILEGAL ─────────────────────────────────────────
+# Pinjaman online ilegal yang tidak terdaftar OJK
+
+# ── INVESTASI BODONG ──────────────────────────────────────
+# Domain investasi penipuan / skema ponzi

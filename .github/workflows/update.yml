@@ -1,0 +1,102 @@
+name: 🔄 Update Blocklist
+
+on:
+  schedule:
+    # Setiap hari jam 01:00 UTC (08:00 WIB)
+    - cron: '0 1 * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (tidak commit)'
+        required: false
+        default: 'false'
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  update-blocklist:
+    name: Update & Commit Blocklist
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 1
+
+      - name: 🔧 Setup environment
+        run: |
+          sudo apt-get install -y curl gawk
+          chmod +x scripts/update.sh
+
+      - name: 🛡️ Jalankan update blocklist
+        run: |
+          if [[ "${{ inputs.dry_run }}" == "true" ]]; then
+            bash scripts/update.sh --dry-run
+          else
+            bash scripts/update.sh
+          fi
+
+      - name: 📊 Tampilkan statistik
+        run: |
+          if [[ -f stats.json ]]; then
+            echo "=== Statistik Blocklist ==="
+            cat stats.json
+            echo ""
+            TOTAL=$(jq -r '.total' stats.json)
+            echo "✅ Total domain diblokir: $TOTAL"
+          fi
+          if [[ -f domain/blocklist.txt ]]; then
+            echo "Baris dalam blocklist.txt: $(wc -l < domain/blocklist.txt)"
+          fi
+
+      - name: 💾 Commit & Push perubahan
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "MalamPutih DNS Bot"
+          git config user.email "bot@dns.purnomoadi.web.id"
+          git add domain/blocklist.txt stats.json
+          if git diff --staged --quiet; then
+            echo "Tidak ada perubahan pada blocklist."
+          else
+            TOTAL=$(jq -r '.total' stats.json 2>/dev/null || echo '?')
+            DATE=$(date -u '+%Y-%m-%d %H:%M UTC')
+            git commit -m "🔄 Update blocklist — ${TOTAL} domain (${DATE})"
+            git push
+            echo "✅ Blocklist berhasil diperbarui dan di-push!"
+          fi
+
+      - name: 📢 Update Technitium DNS Server
+        if: ${{ inputs.dry_run != 'true' && secrets.DNS_TOKEN != '' }}
+        env:
+          DNS_TOKEN: ${{ secrets.DNS_TOKEN }}
+          DNS_HOST: ${{ secrets.DNS_HOST }}
+        run: |
+          echo "Memperbarui blocklist di Technitium DNS..."
+          RESPONSE=$(curl -sf \
+            "http://${DNS_HOST}/api/blocklist/forceUpdate?token=${DNS_TOKEN}" \
+            --max-time 30 2>&1) || true
+          if echo "$RESPONSE" | grep -q '"status":"ok"'; then
+            echo "✅ Technitium DNS berhasil memperbarui blocklist!"
+          else
+            echo "⚠️  Tidak dapat menghubungi Technitium DNS (mungkin private network)"
+          fi
+
+      - name: 📋 Summary
+        run: |
+          echo "## 🛡️ MalamPutih DNS — Blocklist Update" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [[ -f stats.json ]]; then
+            TOTAL=$(jq -r '.total' stats.json)
+            UPDATED=$(jq -r '.updated' stats.json)
+            SOURCES=$(jq -r '.sources' stats.json)
+            echo "| Metrik | Nilai |" >> $GITHUB_STEP_SUMMARY
+            echo "|---|---|" >> $GITHUB_STEP_SUMMARY
+            echo "| Total Domain Diblokir | **${TOTAL}** |" >> $GITHUB_STEP_SUMMARY
+            echo "| Jumlah Sumber | ${SOURCES} |" >> $GITHUB_STEP_SUMMARY
+            echo "| Waktu Update | ${UPDATED} |" >> $GITHUB_STEP_SUMMARY
+          fi

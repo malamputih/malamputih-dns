@@ -1,0 +1,30 @@
+# ============================================================
+# MalamPutih DNS — Regex Blocklist
+# ⚠️  PERHATIAN: Gunakan regex dengan sangat hati-hati!
+#
+# Regex yang terlalu lebar menyebabkan FALSE POSITIVE.
+# Contoh: .*slot.* akan memblokir "slotdeal.com" (toko diskon)
+#
+# Rekomendasi: gunakan exact domain list, bukan regex.
+# Hanya tambahkan regex jika YAKIN tidak ada false positive.
+#
+# Format: regex standar (satu per baris)
+# ============================================================
+
+# ── PANDUAN PENGGUNAAN REGEX AMAN ─────────────────────────
+#
+# ❌ BURUK (terlalu lebar, rawan false positive):
+#   .*judi.*
+#   .*slot.*
+#   .*togel.*
+#
+# ✅ LEBIH BAIK (spesifik ke pola domain judi):
+#   ^(www\.)?[a-z0-9\-]+slot[0-9]+\.(com|net|xyz|site|online)$
+#   ^(www\.)?[a-z0-9\-]+togel[0-9]+\.(com|net|xyz|site|online)$
+#
+# ✅ TERBAIK: Gunakan exact domain di custom-blocklist.txt
+# ============================================================
+
+# Uncomment dan sesuaikan jika diperlukan:
+# ^(www\.)?[a-z0-9\-]*(slot|togel|casino|poker|jackpot)[0-9]{2,}\.(xyz|site|online|fun|live)$
+# ^(www\.)?[a-z0-9\-]*(judi|bet)[0-9]{2,}\.(xyz|site|online|fun|live)$
