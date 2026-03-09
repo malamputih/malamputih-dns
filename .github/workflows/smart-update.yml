@@ -1,8 +1,7 @@
-name: 🧠 Smart Blocklist — Pattern + NRD + Crawler
+name: Smart Blocklist Update
 
 on:
   schedule:
-    # Setiap hari jam 00:00 UTC (07:00 WIB)
     - cron: '0 0 * * *'
   workflow_dispatch:
     inputs:
@@ -27,27 +26,27 @@ jobs:
     timeout-minutes: 45
 
     steps:
-      - name: 📥 Checkout
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🐍 Setup Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: 🔧 Install dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get install -y curl gawk bzip2
           pip install requests tldextract 2>/dev/null || true
           chmod +x scripts/smart-blocklist.sh
           chmod +x scripts/update.sh
 
-      - name: 🔄 Update blocklist utama
+      - name: Update blocklist utama
         run: bash scripts/update.sh
 
-      - name: 🧠 Jalankan Smart Blocklist
+      - name: Jalankan Smart Blocklist
         run: |
           MODE="${{ inputs.mode || 'full' }}"
           case "$MODE" in
@@ -57,9 +56,8 @@ jobs:
             *)       bash scripts/smart-blocklist.sh ;;
           esac
 
-      - name: 🔀 Gabungkan semua blocklist
+      - name: Gabungkan semua blocklist
         run: |
-          echo "Menggabungkan blocklist utama + smart blocklist..."
           MAIN="domain/blocklist.txt"
           SMART="domain/smart-blocklist.txt"
           MERGED="domain/merged-final.txt"
@@ -68,7 +66,6 @@ jobs:
             echo "# MalamPutih DNS — Final Merged Blocklist"
             echo "# Dibuat: $(date -u '+%Y-%m-%d %H:%M:%S UTC')"
             echo ""
-            # Gabungkan semua, deduplikasi
             cat "$MAIN" "$SMART" 2>/dev/null \
               | grep -v '^#' \
               | grep -v '^[[:space:]]*$' \
@@ -76,65 +73,47 @@ jobs:
               | sort -u
           } > "$MERGED"
 
-          TOTAL=$(grep -c '^[a-z]' "$MERGED" || echo 0)
+          TOTAL=$(grep -c '^[a-z]' "$MERGED" 2>/dev/null || echo 0)
           echo "Total merged: $TOTAL domain"
+          echo "TOTAL=$TOTAL" >> $GITHUB_ENV
 
-          # Update stats
-          python3 -c "
-import json
-try:
-    with open('stats.json','r') as f: d=json.load(f)
-except:
-    d={}
-d['total_merged']=$TOTAL
-d['merged_updated']='$(date -u +%Y-%m-%dT%H:%M:%SZ)'
-with open('stats.json','w') as f: json.dump(d,f,indent=2)
-print('stats.json updated')
-" 2>/dev/null || true
-
-      - name: 📊 Statistik
+      - name: Update stats.json
         run: |
-          echo "## 📊 Statistik Update" >> $GITHUB_STEP_SUMMARY
-          echo "| File | Jumlah Domain |" >> $GITHUB_STEP_SUMMARY
-          echo "|---|---|" >> $GITHUB_STEP_SUMMARY
-          for f in domain/blocklist.txt domain/smart-blocklist.txt domain/merged-final.txt; do
-            if [[ -f "$f" ]]; then
-              COUNT=$(grep -c '^[a-z]' "$f" || echo 0)
-              echo "| \`$f\` | **$COUNT** |" >> $GITHUB_STEP_SUMMARY
-            fi
-          done
-          if [[ -f stats.json ]]; then
-            echo "" >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
-            cat stats.json >> $GITHUB_STEP_SUMMARY
-            echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
-          fi
+          python3 << 'PYEOF'
+          import json, os
+          from datetime import datetime, timezone
+          total = int(os.environ.get('TOTAL', 0))
+          try:
+              with open('stats.json', 'r') as f:
+                  d = json.load(f)
+          except:
+              d = {}
+          d['total_merged'] = total
+          d['merged_updated'] = datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
+          with open('stats.json', 'w') as f:
+              json.dump(d, f, indent=2)
+          print(f'stats.json updated: {total} domain')
+          PYEOF
 
-      - name: 💾 Commit & Push
+      - name: Commit dan Push
         run: |
-          git config user.name  "MalamPutih DNS Bot"
+          git config user.name "MalamPutih DNS Bot"
           git config user.email "bot@dns.purnomoadi.web.id"
           git add domain/ stats.json
           if git diff --staged --quiet; then
             echo "Tidak ada perubahan."
           else
-            TOTAL=$(python3 -c "
-import json
-try:
-  d=json.load(open('stats.json'))
-  print(d.get('total_merged', d.get('total','?')))
-except: print('?')
-" 2>/dev/null)
-            git commit -m "🧠 Smart update — ${TOTAL} domain ($(date -u '+%Y-%m-%d %H:%M UTC'))"
+            git commit -m "Smart update — ${TOTAL} domain ($(date -u '+%Y-%m-%d %H:%M UTC'))"
             git push
-            echo "✅ Push berhasil!"
+            echo "Push berhasil!"
           fi
 
-      - name: 🔄 Trigger Technitium Update
+      - name: Trigger Technitium Update
         if: always()
         env:
-          DNS_TOKEN: ${{ secrets.DNS_TOKEN }}
-          DNS_HOST:  ${{ secrets.DNS_HOST }}
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
         run: |
-          curl -sf "http://${DNS_HOST}/api/blocklist/forceUpdate?token=${DNS_TOKEN}" \
-            --max-time 15 | python3 -m json.tool || warn "Technitium tidak dapat dihubungi"
+          curl -sf -X POST https://dns.purnomoadi.web.id/webhook/manual \
+            -H "Authorization: Bearer ${WEBHOOK_SECRET}" \
+            -H "Content-Type: application/json" \
+            --max-time 15 || echo "Webhook tidak dapat dihubungi"
