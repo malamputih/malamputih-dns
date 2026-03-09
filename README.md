@@ -95,10 +95,10 @@ Kamu bisa menggunakan blocklist ini langsung di DNS server kamu sendiri:
 
 ```
 # Blocklist gabungan (semua kategori)
-https://raw.githubusercontent.com/YOUR_USERNAME/malamputih-dns/main/domain/blocklist.txt
+https://raw.githubusercontent.com/malamputih/malamputih-dns/main/domain/blocklist.txt
 
 # Whitelist
-https://raw.githubusercontent.com/YOUR_USERNAME/malamputih-dns/main/domain/whitelist.txt
+https://raw.githubusercontent.com/malamputih/malamputih-dns/main/domain/whitelist.txt
 ```
 
 ### Technitium DNS Server
@@ -109,7 +109,7 @@ https://raw.githubusercontent.com/YOUR_USERNAME/malamputih-dns/main/domain/white
 ### Pi-hole
 ```bash
 # Tambahkan ke /etc/pihole/adlists.conf
-https://raw.githubusercontent.com/YOUR_USERNAME/malamputih-dns/main/domain/blocklist.txt
+https://raw.githubusercontent.com/malamputih/malamputih-dns/main/domain/blocklist.txt
 ```
 
 ---
