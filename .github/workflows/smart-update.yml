@@ -131,7 +131,7 @@ except: print('?')
           fi
 
       - name: 🔄 Trigger Technitium Update
-        if: ${{ secrets.DNS_TOKEN != '' }}
+        if: always()
         env:
           DNS_TOKEN: ${{ secrets.DNS_TOKEN }}
           DNS_HOST:  ${{ secrets.DNS_HOST }}

@@ -71,7 +71,7 @@ jobs:
           fi
 
       - name: 📢 Update Technitium DNS Server
-        if: ${{ inputs.dry_run != 'true' && secrets.DNS_TOKEN != '' }}
+        if: ${{ inputs.dry_run != 'true' }}
         env:
           DNS_TOKEN: ${{ secrets.DNS_TOKEN }}
           DNS_HOST: ${{ secrets.DNS_HOST }}
