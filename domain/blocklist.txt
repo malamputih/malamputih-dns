@@ -1,0 +1,10 @@
+# MalamPutih DNS Blocklist
+# Diperbarui: 2026-03-09 08:41:47 UTC
+# Total domain: 0
+# Sumber: 12 blocklist + custom list
+# Website: https://dns.purnomoadi.web.id
+# Repository: https://github.com/YOUR_USERNAME/malamputih-dns
+#
+# Format: plain domain list (satu domain per baris)
+# Kompatibel dengan: Technitium DNS, Pi-hole, AdGuard Home, dnsmasq
+
