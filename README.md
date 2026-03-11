@@ -101,11 +101,6 @@ https://raw.githubusercontent.com/malamputih/malamputih-dns/main/domain/blocklis
 https://raw.githubusercontent.com/malamputih/malamputih-dns/main/domain/whitelist.txt
 ```
 
-### Technitium DNS Server
-1. Buka Settings → Blocking
-2. Tambahkan URL blocklist di atas
-3. Set interval update: 24 jam
-
 ### Pi-hole
 ```bash
 # Tambahkan ke /etc/pihole/adlists.conf
