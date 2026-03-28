@@ -1,0 +1,355 @@
+# ══════════════════════════════════
+# MalamPutih DNS - Essential Whitelist
+# Services yang tidak boleh diblokir
+# Auto-update setiap 24 jam
+# ══════════════════════════════════
+
+# ── Google Core ──
+google.com
+google.co.id
+googleapis.com
+gstatic.com
+googleusercontent.com
+google-analytics.com
+googletagmanager.com
+googlesyndication.com
+googleadservices.com
+recaptcha.net
+gvt1.com
+gvt2.com
+gvt3.com
+ggpht.com
+connectivitycheck.gstatic.com
+clients1.google.com
+clients2.google.com
+clients3.google.com
+clients4.google.com
+clients5.google.com
+clients6.google.com
+fonts.googleapis.com
+fonts.gstatic.com
+
+# ── YouTube ──
+youtube.com
+youtu.be
+ytimg.com
+yt3.ggpht.com
+googlevideo.com
+youtube-nocookie.com
+
+# ── Gmail ──
+gmail.com
+mail.google.com
+inbox.google.com
+
+# ── Google Workspace ──
+scholar.google.com
+translate.google.com
+classroom.google.com
+meet.google.com
+docs.google.com
+drive.google.com
+forms.google.com
+slides.google.com
+sheets.google.com
+sites.google.com
+calendar.google.com
+
+# ── Microsoft Core ──
+microsoft.com
+microsoftonline.com
+windows.net
+windows.com
+windowsupdate.com
+windowsupdate.microsoft.com
+update.microsoft.com
+download.microsoft.com
+wustat.windows.com
+ntservicepack.microsoft.com
+msftconnecttest.com
+msedge.net
+msauth.net
+msftauth.net
+login.microsoftonline.com
+login.live.com
+msn.com
+
+# ── Microsoft Office ──
+office.com
+office365.com
+office.net
+outlook.com
+outlook.office.com
+outlook.office365.com
+live.com
+hotmail.com
+sharepoint.com
+teams.microsoft.com
+skype.com
+onenote.com
+onedrive.com
+onedrive.live.com
+
+# ── Microsoft Dev ──
+bing.com
+azure.com
+azureedge.net
+azure.net
+visualstudio.com
+
+# ── Apple ──
+apple.com
+icloud.com
+mzstatic.com
+apple-dns.net
+push.apple.com
+captive.apple.com
+itunes.apple.com
+appstoreconnect.apple.com
+
+# ── CDN & Infrastructure ──
+cloudflare.com
+cloudflare.net
+cloudflare-dns.com
+one.one.one.one
+amazonaws.com
+aws.amazon.com
+amazon.com
+amazontrust.com
+akamaihd.net
+akamai.net
+akamaized.net
+akamaitechnologies.com
+edgekey.net
+edgesuite.net
+fastly.net
+fastlylb.net
+fastly.com
+jsdelivr.net
+cdnjs.cloudflare.com
+unpkg.com
+bootstrapcdn.com
+
+# ── Developer ──
+github.com
+github.io
+githubusercontent.com
+githubassets.com
+ghcr.io
+gitlab.com
+bitbucket.org
+stackoverflow.com
+stackexchange.com
+docker.com
+docker.io
+registry.npmjs.org
+pypi.org
+rubygems.org
+
+# ── Chat & Video Call ──
+whatsapp.com
+whatsapp.net
+signal.org
+signal.art
+telegram.org
+t.me
+telegram.me
+zoom.us
+zoom.com
+zoomgov.com
+webex.com
+gotomeeting.com
+
+# ── Social Media ──
+facebook.com
+fbcdn.net
+fbsbx.com
+facebook.net
+connect.facebook.net
+graph.facebook.com
+instagram.com
+cdninstagram.com
+twitter.com
+x.com
+twimg.com
+t.co
+abs.twimg.com
+tiktok.com
+tiktokcdn.com
+reddit.com
+redd.it
+redditstatic.com
+linkedin.com
+licdn.com
+
+# ── Wikipedia ──
+wikipedia.org
+wikimedia.org
+wiktionary.org
+wikiquote.org
+
+# ── Search ──
+duckduckgo.com
+duck.com
+brave.com
+search.brave.com
+
+# ── E-Commerce Indonesia ──
+tokopedia.com
+shopee.co.id
+shopee.com
+lazada.co.id
+bukalapak.com
+blibli.com
+traveloka.com
+tiket.com
+
+# ── Fintech & E-Wallet ──
+gojek.com
+grab.com
+dana.id
+ovo.id
+gopay.co.id
+linkaja.id
+shopeepay.co.id
+
+# ── Bank Indonesia ──
+klikbca.com
+bca.co.id
+mandiri.co.id
+bankmandiri.co.id
+bni.co.id
+bri.co.id
+bsm.co.id
+bankbsi.co.id
+btn.co.id
+cimbniaga.co.id
+danamon.co.id
+permatabank.com
+bi.go.id
+ojk.go.id
+
+# ── News Indonesia ──
+kompas.com
+detik.com
+tribunnews.com
+cnnindonesia.com
+tempo.co
+liputan6.com
+suara.com
+idntimes.com
+cnbcindonesia.com
+kumparan.com
+tirto.id
+republika.co.id
+antaranews.com
+
+# ── Streaming ──
+netflix.com
+nflxvideo.net
+nflximg.net
+nflxext.com
+spotify.com
+scdn.co
+spotifycdn.com
+disneyplus.com
+disney-plus.net
+vidio.com
+primevideo.com
+
+# ── Gaming ──
+steam.com
+steampowered.com
+steamcommunity.com
+steamcdn-a.akamaihd.net
+epicgames.com
+unrealengine.com
+
+# ── Antivirus ──
+kaspersky.com
+avast.com
+avg.com
+mcafee.com
+norton.com
+bitdefender.com
+eset.com
+malwarebytes.com
+
+# ── Certificate / OCSP ──
+ocsp.digicert.com
+ocsp.pki.goog
+ocsp.sectigo.com
+ocsp.comodoca.com
+ocsp.usertrust.com
+ocsp.godaddy.com
+ocsp.entrust.net
+crl.microsoft.com
+crl3.digicert.com
+crl4.digicert.com
+letsencrypt.org
+r3.o.lencr.org
+x1.c.lencr.org
+
+# ── Browser ──
+detectportal.firefox.com
+firefox.com
+mozilla.org
+mozilla.com
+mozilla.net
+
+# ── OS / Package ──
+debian.org
+ubuntu.com
+canonical.com
+snapcraft.io
+launchpad.net
+
+# ── Productivity ──
+slack.com
+slackb.com
+slack-edge.com
+notion.so
+notion.site
+trello.com
+atlassian.com
+atlassian.net
+asana.com
+monday.com
+clickup.com
+figma.com
+canva.com
+
+# ── CMS ──
+gravatar.com
+wp.com
+wordpress.com
+wordpress.org
+
+# ── Education ──
+khanacademy.org
+ruangguru.com
+zenius.net
+quipper.com
+brainly.co.id
+coursera.org
+edx.org
+udemy.com
+
+# ── Monitoring / IP Check ──
+sentry.io
+bugsnag.com
+newrelic.com
+ipify.org
+icanhazip.com
+ifconfig.me
+ipinfo.io
+ip-api.com
+
+# ── MalamPutih DNS ──
+purnomoadi.web.id
+dns.purnomoadi.web.id
+family.purnomoadi.web.id
+kids.purnomoadi.web.id
+office.purnomoadi.web.id
+adult.purnomoadi.web.id
+private.purnomoadi.web.id
