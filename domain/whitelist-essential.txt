@@ -353,3 +353,19 @@ kids.purnomoadi.web.id
 office.purnomoadi.web.id
 adult.purnomoadi.web.id
 private.purnomoadi.web.id
+
+# ── Update ──
+osupdate2020.shalltry.com          
+ire-oneid.shalltry.com             
+authbe.sec.intl.miui.com           
+api.device.xiaomi.net              
+findapi.micloud.xiaomi.net         
+api.g.micloud.xiaomi.net           
+gslb.shalltry.com                  
+dcintl1.push.heytapmobile.com      
+dcintl.push.heytapmobile.com       
+ccms.shopee.io                     
+msdk.shopee.sg                     
+patronus.idata.shopeemobile.com    
+sgplog.ezvizlife.com               
+firebase-settings.crashlytics.com  
