@@ -354,6 +354,17 @@ office.purnomoadi.web.id
 adult.purnomoadi.web.id
 private.purnomoadi.web.id
 
+# ── Login ──
+static.cloudflareinsights.com
+chimpstatic.com
+firebase-settings.crashlytics.com
+app-measurement.com
+id.rlcdn.com
+connectid.analytics.yahoo.com
+assets.ubembed.com
+static.hotjar.com
+script.hotjar.com
+
 # ── Update ──
 osupdate2020.shalltry.com
 gslb.shalltry.com
