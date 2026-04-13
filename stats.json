@@ -1,12 +1,8 @@
 {
   "total": 0,
-  "updated": "2026-04-13T02:49:24Z",
+  "updated": "2026-04-13T04:14:14Z",
   "sources": 12,
   "raw": 0,
   "duplicates_removed": 0,
-  "whitelisted": 0,
-  "smart_blocked": 19352,
-  "smart_updated": "2026-04-13T02:49:25Z",
-  "total_merged": 19352,
-  "merged_updated": "2026-04-13T02:49:26Z"
+  "whitelisted": 0
 }
