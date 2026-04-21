@@ -1,5 +1,5 @@
 # MalamPutih DNS Blocklist
-# Diperbarui: 2026-04-21 02:43:05 UTC
+# Diperbarui: 2026-04-21 03:58:06 UTC
 # Total domain: 0
 # Sumber: 12 blocklist + custom list
 # Website: https://dns.purnomoadi.web.id
