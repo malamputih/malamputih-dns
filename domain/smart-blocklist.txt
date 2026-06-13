@@ -1,5 +1,5 @@
 # MalamPutih DNS — Smart Blocklist
-# Dibuat: 2026-06-12 04:05:32 UTC
+# Dibuat: 2026-06-13 03:53:50 UTC
 # Metode: Pattern TLD-based + NRD + Crawler + Scoring
 # Total: 19352 domain
 # Website: https://dns.purnomoadi.web.id
