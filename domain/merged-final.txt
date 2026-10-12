@@ -1,5 +1,5 @@
 # MalamPutih DNS — Final Merged Blocklist
-# Dibuat: 2026-10-11 04:29:26 UTC
+# Dibuat: 2026-10-12 04:44:42 UTC
 
 agen.bet
 agen.casino
